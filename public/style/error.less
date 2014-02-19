@@ -1,0 +1,19 @@
+@import 'lib/mixins/default-shadow-border.less';
+@import 'lib/allPages.less';
+
+body {
+	padding-top: 200px;
+	#content {		
+		.default-shadow-border();		
+		margin-left: auto;
+		margin-right: auto;
+		width: 600px;		
+		text-align: center;
+		#error-message {			
+			padding: 10px 0px; 
+			#home-link-text {
+				font-weight: bold;
+			}
+		}
+	}
+}

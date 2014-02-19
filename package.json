@@ -1,0 +1,38 @@
+{
+  "name": "base-node-project",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node website.js"
+  },
+  "repository" : { 
+    "type" : "git",
+    "url" : "https://github.com/"
+  },
+  "dependencies": {
+    "restify":"*",
+    "express": "3.2.6",
+    "ejs": "*",    
+    "less-middleware": "*",
+    "underscore":"*",
+    "simple-loggly":"*",
+    "connect-mongodb":"*",
+    "dateformat":"*",
+    "passport":"*",
+    "mongorepository" : "*",
+    "async":"*",
+    "date-utils":"*",
+    "rollbar":"*"
+  },
+  "devDependencies": {
+    "zombie": "*",
+    "mocha": "*",
+    "chai": "*",
+    "jshint": "*",
+    "request" : "*",
+    "get": "*"
+  },
+  "engines": {
+    "node": "0.10.x"
+  }
+}

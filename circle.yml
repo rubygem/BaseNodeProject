@@ -1,0 +1,44 @@
+machine:
+    node:
+        version: 0.10.0
+deployment:
+  staging:
+    branch: master
+    commands:
+    - git push git@heroku.com:allegro-dev.git $CIRCLE_SHA1:refs/heads/master
+    - heroku config:set COOKIE_DOMAIN=dev.allegro.net
+                        BASE_URI=dev.allegro.net
+                        BUILDPACK_URL=https://github.com/heroku/heroku-buildpack-nodejs
+                        CLIENT_ID=qNjpQItZ5rBCKqnAhYLgbqAcLP0m76of4mA7UQz5
+                        DATA_STORE_CONNECTION_STRING=$REAL_DATA_STORE
+                        VIEW_STORE_CONNECTION_STRING=$REAL_VIEW_STORE
+                        EVENT_STORE_CONNECTION_STRING=$REAL_EVENT_STORE
+                        LOGGLY_ERROR_KEY=7e00931e-dbd4-4253-8c53-6371e3845812
+                        LOGIN_SECRET=OCdfnWGrzbIVQePJ68wHohKRUdoHpAySifx6fSNU
+                        LOGIN_SUBDOMAIN=allegro
+                        NODE_ENV=production
+                        PATH=bin=node_modules/.bin:/usr/local/bin:/usr/bin:/bin
+                        GATEWAY_URI=$REAL_GATEWAY_URI
+                        PAPERTRAIL_API_TOKEN=JV9Ch34gYcpmkHmNVZE
+                        ROLLBAR_ACCESS_TOKEN=15d7750afbb5472fa1d42a547c511e91
+                        ROLLBAR_ENDPOINT=https://api.rollbar.com/api/1/item/
+                        ROLLBAR_ADMIN_TOKEN=$ROLLBAR_ADMIN_TOKEN --app allegro-dev
+    - git push git@heroku.com:test-developers.git $CIRCLE_SHA1:refs/heads/master
+    - heroku config:set ENVIRONMENT=test 
+                        COOKIE_DOMAIN=test-dev.allegro.net 
+                        BASE_URI=test-dev.allegro.net 
+                        BUILDPACK_URL=https://github.com/heroku/heroku-buildpack-nodejs 
+                        CLIENT_ID=fFcTTq0Bx6MNYOS0zSSah4RT17cj0LrHCGpJNCuo
+                        DATA_STORE_CONNECTION_STRING=$TEST_DATA_STORE
+                        EVENT_STORE_CONNECTION_STRING=$TEST_EVENT_STORE
+                        VIEW_STORE_CONNECTION_STRING=$TEST_VIEW_STORE
+                        LOGGLY_ERROR_KEY=7e00931e-dbd4-4253-8c53-6371e3845812 
+                        LOGIN_SECRET=Ls6isp3ucaz4qvWuDZMADiZpKFx6BQKfDdVyjEKV
+                        LOGIN_SUBDOMAIN=demo
+                        GATEWAY_URI=$TEST_GATEWAY_URI
+                        ROLLBAR_ADMIN_TOKEN=$ROLLBAR_ADMIN_TOKEN
+                        NODE_ENV=test
+                        PAPERTRAIL_API_TOKEN=JV9Ch34gYcpmkHmNVZE
+                        PATH=bin:node_modules/.bin:/usr/local/bin:/usr/bin:/bin
+                        ROLLBAR_ACCESS_TOKEN=15d7750afbb5472fa1d42a547c511e91
+                        ROLLBAR_ENDPOINT=https://api.rollbar.com/api/1/item/ --app test-developers
